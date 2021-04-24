@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "861498532012",
+    "project_id": "robotikapp-4dc74",
+    "storage_bucket": "robotikapp-4dc74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861498532012:android:2c7de0c501a7657dfdbf09",
+        "android_client_info": {
+          "package_name": "com.example.robotikapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "861498532012-6uoiquuut3p2mudbi47tji6a4er7acbp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTeGy0mcvQFtGOxb8jyIDPRXQuOpLwzvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "861498532012-6uoiquuut3p2mudbi47tji6a4er7acbp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
