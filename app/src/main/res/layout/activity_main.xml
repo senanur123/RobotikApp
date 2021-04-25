@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,22 +17,63 @@
         android:background="@drawable/btn_bg"
         android:onClick="captureImage"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="20dp"
         android:textStyle="bold"
         android:padding="10dp"
         />
-
     <Button
         android:id="@+id/btnDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/btn_bg"
         android:onClick="displayImage"
         android:padding="10dp"
-        android:text="Display Image"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:text="Display Captured Image"></Button>
+
+    <TextView
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="OR"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp">
+
+    </TextView>
+    <Button
+        android:id="@+id/btnSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Image"
+        android:background="@drawable/btn_bg"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        />
+    <TextView
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="Selected Image Shown Here:"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/viewImage"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+
+    </ImageView>
 
 
 </LinearLayout>
