@@ -2,22 +2,29 @@ package com.example.robotikapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -29,8 +36,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
 
     Button captureBtn, selectBtn, displayBtn;
     String currentImagePath = null;
@@ -41,47 +47,43 @@ public class MainActivity extends AppCompatActivity
     private static final int IMAGE_REQUEST = 1;
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
+    private static final int CAMERA_PERM_CODE = 4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         captureBtn = findViewById(R.id.btnCapture);
-        displayBtn = findViewById(R.id.btnDisplay);
         selectBtn = findViewById(R.id.btnSelect);
         imageview = findViewById(R.id.viewImage);
 
-    captureBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try {
-                captureImage(v);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-    });
-
-    displayBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            displayImage(v);
-        }
-    });
-    selectBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_CODE_STORAGE_PERMISSION);
-            }else{
-                selectImage();
+        captureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    captureImage(v);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
-        }
-    });
+        });
+
+        selectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            REQUEST_CODE_STORAGE_PERMISSION);
+                }else{
+                    selectImage();
+                }
+
+            }
+        });
 
     }
 
@@ -102,8 +104,12 @@ public class MainActivity extends AppCompatActivity
             if(imageFile!=null){
 
                 Uri imageUri = FileProvider.getUriForFile(this, "com.example.robotikapp.provider", imageFile);
+                System.out.println("uri: " + imageUri);
+                String pp = imageFile.getPath();
+                System.out.println("uri path: " + pp);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(cameraIntent,IMAGE_REQUEST);
+                startActivityForResult(cameraIntent, IMAGE_REQUEST);
+
 
             }
 
@@ -131,15 +137,6 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
-
-
-    public void displayImage(View view){
-
-        Intent intent = new Intent(this, DisplayImageActivity.class);
-        intent.putExtra("image_path", currentImagePath);
-        startActivity(intent);
-    }
-
 
 
     private File getImageFile() throws IOException {
@@ -171,6 +168,18 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         }
+        if(requestCode == IMAGE_REQUEST ){
+
+            System.out.println("uri in act result: "  + currentImagePath);
+            Bitmap bmap = BitmapFactory.decodeFile(currentImagePath);
+            imageview.setImageBitmap(bmap);
+
+
+
+        }
 
     }
+
+
 }
+

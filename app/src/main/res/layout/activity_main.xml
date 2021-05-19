@@ -1,67 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg2"
-    >
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnCapture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Capture Image"
-        android:background="@drawable/btn_bg"
-        android:onClick="captureImage"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:padding="10dp"
-        />
-    <Button
-        android:id="@+id/btnDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_bg"
-        android:onClick="displayImage"
-        android:padding="10dp"
-        android:textStyle="bold"
-        android:text="Display Captured Image"></Button>
-
-    <TextView
-        android:paddingTop="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="OR"
-        android:textColor="@color/colorWhite"
-        android:textSize="20sp">
-
-    </TextView>
-    <Button
-        android:id="@+id/btnSelect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Image"
-        android:background="@drawable/btn_bg"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
+        android:layout_margin="15dp"
+        android:orientation="horizontal"
         android:padding="10dp"
-        />
+
+
+        >
+
+        <Button
+            android:id="@+id/btnCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_bg"
+            android:onClick="captureImage"
+            android:padding="10dp"
+            android:text="Capture Image"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="OR"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/btnSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+
+            android:background="@drawable/btn_bg"
+            android:padding="10dp"
+            android:text="Select Image"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
     <TextView
-        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="center"
-        android:text="Selected Image Shown Here:"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:text="Image:"
         android:textColor="@color/colorWhite"
         android:textSize="20sp">
 
@@ -69,11 +71,23 @@
 
     <ImageView
         android:id="@+id/viewImage"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:adjustViewBounds="true"
+        >
 
     </ImageView>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_bg"
+        android:backgroundTint="#FFFFFF"
+        android:textStyle="bold"
+        android:text="SEND" />
 
 
 </LinearLayout>

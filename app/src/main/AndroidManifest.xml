@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.robotikapp">
 
+
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -21,8 +23,6 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true">
 
-        <activity android:name=".DisplayImageActivity"
-            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".ClientActivity"
             android:theme="@style/AppTheme">
@@ -37,15 +37,17 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme">
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
