@@ -1,5 +1,6 @@
 package com.example.robotikapp;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -36,6 +37,10 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
+
+
 public class MainActivity extends AppCompatActivity {
 
     Button captureBtn, selectBtn, displayBtn;
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     Intent selectIntent;
     Bitmap bitmap;
     ImageView imageview;
+
+
 
     private static final int IMAGE_REQUEST = 1;
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
@@ -57,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         captureBtn = findViewById(R.id.btnCapture);
         selectBtn = findViewById(R.id.btnSelect);
         imageview = findViewById(R.id.viewImage);
+
 
         captureBtn.setOnClickListener(new View.OnClickListener() {
             @Override

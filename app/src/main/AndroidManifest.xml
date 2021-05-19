@@ -24,14 +24,6 @@
         android:requestLegacyExternalStorage="true">
 
         <activity
-            android:name=".ClientActivity"
-            android:theme="@style/AppTheme">
-
-        </activity>
-        <activity
-            android:name=".CameraActivity"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".RegisterActivity"
             android:theme="@style/AppTheme" />
         <activity

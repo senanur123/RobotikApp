@@ -11,7 +11,7 @@
         android:id="@+id/regText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Registrieren"
         android:textColor="@color/colorWhite"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -27,15 +27,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:autofillHints=""
         android:background="@drawable/input_bg"
         android:drawableLeft="@drawable/ic_person"
         android:drawablePadding="5dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Benutzername"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -45,8 +44,7 @@
         android:textColorHint="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regText"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/regText" />
 
     <EditText
         android:id="@+id/regEmail"
@@ -78,15 +76,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:background="@drawable/input_bg"
         android:drawableLeft="@drawable/ic_security"
         android:drawablePadding="5dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Passwort"
         android:inputType="textPassword"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -106,14 +102,13 @@
         android:background="@drawable/btn_bg"
         android:backgroundTint="@color/colorWhite"
         android:shadowColor="#000000"
-        android:text="Register"
+        android:text="Registrieren "
         android:textColor="@color/colorBlack"
         app:backgroundTint="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="@+id/regPassword"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/regPassword"
-        app:layout_constraintTop_toBottomOf="@+id/regPassword"
-  />
+        app:layout_constraintTop_toBottomOf="@+id/regPassword" />
 
     <TextView
         android:id="@+id/alreadyHaveAccount"
@@ -121,10 +116,34 @@
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Already have account?"
+        android:text="Sie haben bereits ein Konto?"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alreadyHaveAccount"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/tu" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="244dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        app:srcCompat="@drawable/tau" />
 </androidx.constraintlayout.widget.ConstraintLayout>

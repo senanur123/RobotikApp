@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:background="@drawable/bg2">
+    android:background="@drawable/bg2"
+    tools:context=".LoginActivity">
 
     <TextView
         android:id="@+id/loginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Anmelden"
         android:textColor="@color/colorWhite"
         android:textSize="30dp"
         android:textStyle="bold"
@@ -34,7 +34,7 @@
         android:drawableLeft="@drawable/ic_person"
         android:drawablePadding="5dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Benutzername"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -44,8 +44,7 @@
         android:textColorHint="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginText"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/loginText" />
 
     <EditText
         android:id="@+id/loginPassword"
@@ -60,7 +59,7 @@
         android:drawableLeft="@drawable/ic_security"
         android:drawablePadding="5dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Passwort"
         android:inputType="textPassword"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -80,7 +79,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Forgot Password?"
+        android:text="Passwort vergessen ?"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/loginPassword"
@@ -95,13 +94,12 @@
         android:background="@drawable/btn_bg"
         android:backgroundTint="@color/colorWhite"
         android:shadowColor="#000000"
-        android:text="Login"
+        android:text="Anmelden"
         android:textColor="@color/colorBlack"
         app:backgroundTint="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="@+id/forgotPassword"
         app:layout_constraintStart_toStartOf="@+id/loginPassword"
-        app:layout_constraintTop_toBottomOf="@+id/forgotPassword"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
 
 
     <TextView
@@ -110,7 +108,7 @@
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Don't have an account?"
+        android:text="Neu hier?"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/signUp"
@@ -124,7 +122,7 @@
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Sign Up."
+        android:text="Registrieren."
         android:textColor="@color/colorBlack"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/btnLogin"
@@ -132,28 +130,29 @@
         app:layout_constraintStart_toEndOf="@+id/dontHaveAccount"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-    <Button
-        android:paddingLeft="10dp"
-        android:id="@+id/btnGoogle"
-        android:layout_width="166dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="61dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:background="@drawable/btn_bg"
-        android:drawableLeft="@drawable/ic_google"
-        android:drawablePadding="10dp"
-        android:text="Google"
-        android:textAllCaps="false"
-        android:textColor="@color/colorBlack"
-        app:backgroundTint="@color/colorWhite"
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dontHaveAccount"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/tau" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUp"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/tu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
