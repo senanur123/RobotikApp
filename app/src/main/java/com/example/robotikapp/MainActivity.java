@@ -1,45 +1,34 @@
 package com.example.robotikapp;
 
-import androidx.annotation.DrawableRes;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.webkit.MimeTypeMap;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
@@ -76,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         captureBtn = findViewById(R.id.btnCapture);
         selectBtn = findViewById(R.id.btnSelect);
         imageview = findViewById(R.id.viewImage);
@@ -112,23 +102,22 @@ public class MainActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    sendPhoto();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                sendPhoto();
             }
         });
 
     }
 
-    private void sendPhoto() throws IOException {
-        // currentImagePath shows the
+    private void sendPhoto() {
+        // currentImagePath
         System.out.println("current image: " + currentImagePath);
 
         if(currentImagePath == null){
-            Toast.makeText(this, "You havent chosen anything!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sie haben keine Fotos zum Senden ausgewählt!", Toast.LENGTH_SHORT).show();
         }else{
+            Toast.makeText(this, "Fotos werden in wenigen Sekunden zum Server gesendet!", Toast.LENGTH_SHORT).show();
+
+            /*
             File imagefile = imageFile;
             FileInputStream fis = null;
             try {
@@ -141,21 +130,24 @@ public class MainActivity extends AppCompatActivity {
 
             Bitmap bm = BitmapFactory.decodeStream(fis);
             if(bm == null){
-                System.out.println("What the heck");
+                System.out.println("Somethings wrong!");
             }else {
                 imgbyte = getBytesFromBitmap(bm);
+                connected = true;
             }
 
 
             if (!connected) {
-                serverIpAddress = "127.0.0.1";
+                serverIpAddress = "192.168.1.8";
                 if (!serverIpAddress.equals("")) {
                     Thread cThread = new Thread(new ClientThread());
                     cThread.start();
                 }
             }
-
+*/
         }
+
+
 
     }
     public byte[] getBytesFromBitmap(Bitmap bitmap) {
@@ -172,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
                 System.out.println("Client is running for a connection!");
                 // HATA OLAN KISIM:
-                socket = new Socket("127.0.0.1", 5000);
+                socket = new Socket("192.168.1.8", 5000);
                 System.out.println("HEYYYYYYYYYY");
                 System.out.println(socket.getInetAddress());
 
@@ -197,46 +189,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*
 
-    public class ClientThread implements Runnable {
-
-        public void run() {
-            try {
-                System.out.println("Cthread check");
-                InetAddress serverAddr = InetAddress.getByName(serverIpAddress);
-                Log.d("ClientActivity", "C: Connecting...");
-                socket = new Socket(serverAddr, 5000);
-                connected = true;
-                while (connected) {
-                    try {
-
-
-
-
-                        OutputStream output = socket.getOutputStream();
-                        Log.d("ClientActivity", "C: image writing.");
-                        output.write(imgbyte);
-                        output.flush();
-
-    protected void onStop() {
-        super.onStop();
-        try {
-            // MAKE SURE YOU CLOSE THE SOCKET UPON EXITING
-            if(socket==null){
-                System.out.println("Somethings wrong!");
-            }else{
-                socket.close();
-                connected = false;
-            }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    */
 
 
 

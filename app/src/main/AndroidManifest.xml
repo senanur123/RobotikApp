@@ -3,7 +3,13 @@
     package="com.example.robotikapp">
 
 
+    <supports-screens
+        android:smallScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:normalScreens="true">
 
+    </supports-screens>
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -29,16 +35,17 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme">
-
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme">
+
         </activity>
 
         <provider
