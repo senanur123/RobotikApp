@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -30,10 +31,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -43,18 +51,25 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button captureBtn, selectBtn, displayBtn;
+    Button captureBtn, selectBtn, sendBtn;
     String currentImagePath = null;
     Intent selectIntent;
     Bitmap bitmap;
     ImageView imageview;
+    File imageFile = null;
+
 
 
 
     private static final int IMAGE_REQUEST = 1;
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
-    private static final int CAMERA_PERM_CODE = 4;
+
+    private String serverIpAddress = "";
+    private boolean connected = false;
+    private Handler handler = new Handler();
+    private Socket socket;
+    private byte [] imgbyte;
 
 
     @Override
@@ -64,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         captureBtn = findViewById(R.id.btnCapture);
         selectBtn = findViewById(R.id.btnSelect);
         imageview = findViewById(R.id.viewImage);
+        sendBtn = findViewById(R.id.btnSend);
 
 
         captureBtn.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +109,136 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    sendPhoto();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
+
+    private void sendPhoto() throws IOException {
+        // currentImagePath shows the
+        System.out.println("current image: " + currentImagePath);
+
+        if(currentImagePath == null){
+            Toast.makeText(this, "You havent chosen anything!", Toast.LENGTH_SHORT).show();
+        }else{
+            File imagefile = imageFile;
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(imagefile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+
+            Bitmap bm = BitmapFactory.decodeStream(fis);
+            if(bm == null){
+                System.out.println("What the heck");
+            }else {
+                imgbyte = getBytesFromBitmap(bm);
+            }
+
+
+            if (!connected) {
+                serverIpAddress = "127.0.0.1";
+                if (!serverIpAddress.equals("")) {
+                    Thread cThread = new Thread(new ClientThread());
+                    cThread.start();
+                }
+            }
+
+        }
+
+    }
+    public byte[] getBytesFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        return stream.toByteArray();
+    }
+
+    public class ClientThread implements Runnable {
+
+        @Override
+        public void run() {
+            try {
+
+                System.out.println("Client is running for a connection!");
+                // HATA OLAN KISIM:
+                socket = new Socket("127.0.0.1", 5000);
+                System.out.println("HEYYYYYYYYYY");
+                System.out.println(socket.getInetAddress());
+
+                if(connected){
+                    OutputStream output = socket.getOutputStream();
+                    System.out.println("Image writing!");
+                    output.write(imgbyte);
+                    output.flush();
+                    System.out.println("Image writing DONE!");
+                }
+
+            } catch (UnknownHostException e) {
+                System.out.println("Unknown host!");
+                e.printStackTrace();
+            } catch (IOException e){
+                System.out.println("Io Exception!");
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
+
+    /*
+
+    public class ClientThread implements Runnable {
+
+        public void run() {
+            try {
+                System.out.println("Cthread check");
+                InetAddress serverAddr = InetAddress.getByName(serverIpAddress);
+                Log.d("ClientActivity", "C: Connecting...");
+                socket = new Socket(serverAddr, 5000);
+                connected = true;
+                while (connected) {
+                    try {
+
+
+
+
+                        OutputStream output = socket.getOutputStream();
+                        Log.d("ClientActivity", "C: image writing.");
+                        output.write(imgbyte);
+                        output.flush();
+
+    protected void onStop() {
+        super.onStop();
+        try {
+            // MAKE SURE YOU CLOSE THE SOCKET UPON EXITING
+            if(socket==null){
+                System.out.println("Somethings wrong!");
+            }else{
+                socket.close();
+                connected = false;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    */
+
+
 
     public void captureImage(View view) throws FileNotFoundException {
         // opens camera
@@ -101,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
         // check if the activity can handle this intent
         if (cameraIntent.resolveActivity(getPackageManager()) !=null)
         {
-            File imageFile = null;
 
             try{
                 imageFile = getImageFile();
@@ -164,8 +308,10 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == RESULT_OK){
             if(data!=null){
                 Uri selectedImageUri = data.getData();
+
                 if(selectedImageUri!=null){
                     try{
+                        imageFile = getImageFile();
                         InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
                         bitmap = BitmapFactory.decodeStream(inputStream);
                         imageview.setImageBitmap(bitmap);
